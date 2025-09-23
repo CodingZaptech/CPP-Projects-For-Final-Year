@@ -19,7 +19,6 @@ This is a beginner-friendly Digital Calculator project in C++. It performs basic
 
 ---
 
-## ⚡ How to Run
-```bash
+## How to Run
 g++ DigitalCalculator.cpp -o digital_calculator
 ./digital_calculator
