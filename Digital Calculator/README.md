@@ -7,7 +7,7 @@ This is a beginner-friendly Digital Calculator project in C++. It performs basic
 ## Features
 - Perform **Addition, Subtraction, Multiplication, Division**
 - Handle **Exponentiation (^)** and **Modulo (%)**
-- Simple console interface, beginner-friendly
+- Simple interface, beginner-friendly
 
 ---
 
@@ -15,7 +15,7 @@ This is a beginner-friendly Digital Calculator project in C++. It performs basic
 - **C++ programming language**  
 - **I/O Streams** (`cin`, `cout`)  
 - **Standard Library** (`cmath`, `fmod`, switch case)  
-- **GTK Module** (Optional for GUI)  
+- **GTK Module**   
 
 ---
 
