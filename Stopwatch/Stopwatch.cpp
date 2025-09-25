@@ -1,27 +1,18 @@
-#include <iostream>
-#include <chrono>
-#include <thread>
-using namespace std;
-using namespace std::chrono;
+#include "Stopwatch.h"
+#include "StopwatchBackend.cpp"
 
 int main() {
-    char start;
-    cout << "===== Stopwatch =====" << endl;
-    cout << "Press 's' to start: ";
-    cin >> start;
+    Stopwatch stopwatch;
+    char choice;
 
-    if(start == 's' || start == 'S') {
-        auto begin = steady_clock::now();
-        cout << "Stopwatch started. Press any key and Enter to stop." << endl;
-        cin.ignore(); // ignore leftover newline
-        cin.get(); // wait for key press
+    do {
+        cout << "\n--- Stopwatch Menu ---\n";
+        cout << "1. Start\n2. Stop\n3. Reset\n4. Exit\nChoice: ";
+        cin >> choice;
 
-        auto end = steady_clock::now();
-        auto duration = duration_cast<seconds>(end - begin).count();
-        cout << "Elapsed time: " << duration << " seconds." << endl;
-    } else {
-        cout << "Stopwatch not started." << endl;
-    }
+        handleStopwatchChoice(stopwatch, choice);
+
+    } while (choice != '4');
 
     return 0;
 }
