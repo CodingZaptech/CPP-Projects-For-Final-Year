@@ -1,49 +1,18 @@
-#include <iostream>
-#include <iomanip>
-#include <vector>
-using namespace std;
-
-struct Item {
-    string name;
-    double price;
-    int quantity;
-};
+#include "Billing.h"
+#include "Backend.cpp"
 
 int main() {
-    int n;
-    cout << "===== Billing Machine =====" << endl;
-    cout << "Enter number of items: ";
-    cin >> n;
+    Billing bill;
+    int choice;
 
-    vector<Item> items(n);
-    double total = 0;
+    do {
+        cout << "\n--- Billing Machine ---\n";
+        cout << "1. Add Item\n2. Print Bill\n3. Exit\nChoice: ";
+        cin >> choice;
 
-    // Input item details
-    for(int i = 0; i < n; i++) {
-        cout << "Enter name of item " << i+1 << ": ";
-        cin >> items[i].name;
-        cout << "Enter price of item " << i+1 << ": ";
-        cin >> items[i].price;
-        cout << "Enter quantity of item " << i+1 << ": ";
-        cin >> items[i].quantity;
-        total += items[i].price * items[i].quantity;
-    }
+        handleBillingChoice(bill, choice);
 
-    // Display bill
-    cout << "\n===== BILL =====" << endl;
-    cout << left << setw(15) << "Item" 
-         << setw(10) << "Price" 
-         << setw(10) << "Quantity" 
-         << setw(10) << "Total" << endl;
-
-    for(auto &item : items) {
-        cout << left << setw(15) << item.name
-             << setw(10) << item.price
-             << setw(10) << item.quantity
-             << setw(10) << item.price * item.quantity << endl;
-    }
-
-    cout << "\nGrand Total: " << total << " USD" << endl;
+    } while (choice != 3);
 
     return 0;
 }
