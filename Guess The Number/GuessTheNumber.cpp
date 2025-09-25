@@ -1,27 +1,18 @@
-#include <iostream>
-#include <cstdlib>
-#include <ctime>
-using namespace std;
+#include "GuessNumber.h"
+#include "Backend.cpp"
 
 int main() {
-    srand(time(0));
-    int number = rand() % 100 + 1; // Random number between 1-100
-    int guess;
-    int attempts = 0;
-
-    cout << "===== Guess The Number =====" << endl;
-    cout << "Guess the number between 1 and 100:" << endl;
+    GuessNumber game;
+    int choice;
 
     do {
-        cin >> guess;
-        attempts++;
-        if(guess > number)
-            cout << "Too high! Try again." << endl;
-        else if(guess < number)
-            cout << "Too low! Try again." << endl;
-        else
-            cout << "Congratulations! You guessed the number in " << attempts << " attempts." << endl;
-    } while(guess != number);
+        cout << "\n--- Guess The Number ---\n";
+        cout << "1. Play Game\n2. Exit\nChoice: ";
+        cin >> choice;
+
+        handleGuessChoice(game, choice);
+
+    } while (choice != 2);
 
     return 0;
 }
