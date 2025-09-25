@@ -1,65 +1,42 @@
-#include <iostream>
-using namespace std;
+#include "TicTacToe.h"
 
-// Function to display the board
-void displayBoard(char board[3][3]) {
-    cout << "Tic-Tac-Toe Board:" << endl;
-    for(int i=0; i<3; i++) {
-        for(int j=0; j<3; j++) {
-            cout << board[i][j] << " ";
+TicTacToe::TicTacToe() {
+    currentPlayer = 'X';
+    for(int i=0;i<3;i++)
+        for(int j=0;j<3;j++)
+            board[i][j] = ' ';
+}
+
+void TicTacToe::printBoard() {
+    cout << "\n";
+    for(int i=0;i<3;i++) {
+        for(int j=0;j<3;j++) {
+            cout << board[i][j];
+            if(j<2) cout << " | ";
         }
-        cout << endl;
+        cout << "\n";
+        if(i<2) cout << "---------\n";
     }
 }
 
-// Function to check for winner
-char checkWinner(char board[3][3]) {
-    // Check rows and columns
-    for(int i=0; i<3; i++) {
-        if(board[i][0] == board[i][1] && board[i][1] == board[i][2])
-            return board[i][0];
-        if(board[0][i] == board[1][i] && board[1][i] == board[2][i])
-            return board[0][i];
+bool TicTacToe::makeMove(int row, int col) {
+    if(board[row][col] == ' ') {
+        board[row][col] = currentPlayer;
+        return true;
     }
-    // Check diagonals
-    if(board[0][0] == board[1][1] && board[1][1] == board[2][2])
-        return board[0][0];
-    if(board[0][2] == board[1][1] && board[1][1] == board[2][0])
-        return board[0][2];
-
-    return ' '; // No winner
+    return false;
 }
 
-int main() {
-    char board[3][3] = { {'1','2','3'}, {'4','5','6'}, {'7','8','9'} };
-    int choice;
-    char player = 'X';
-    char winner = ' ';
-    int moves = 0;
-
-    while(winner == ' ' && moves < 9) {
-        displayBoard(board);
-        cout << "Player " << player << ", enter your move (1-9): ";
-        cin >> choice;
-
-        int row = (choice-1)/3;
-        int col = (choice-1)%3;
-
-        if(board[row][col] != 'X' && board[row][col] != 'O') {
-            board[row][col] = player;
-            moves++;
-            winner = checkWinner(board);
-            player = (player == 'X') ? 'O' : 'X';
-        } else {
-            cout << "Invalid move! Try again." << endl;
-        }
+bool TicTacToe::checkWin() {
+    for(int i=0;i<3;i++) {
+        if(board[i][0]==currentPlayer && board[i][1]==currentPlayer && board[i][2]==currentPlayer) return true;
+        if(board[0][i]==currentPlayer && board[1][i]==currentPlayer && board[2][i]==currentPlayer) return true;
     }
+    if(board[0][0]==currentPlayer && board[1][1]==currentPlayer && board[2][2]==currentPlayer) return true;
+    if(board[0][2]==currentPlayer && board[1][1]==currentPlayer && board[2][0]==currentPlayer) return true;
+    return false;
+}
 
-    displayBoard(board);
-    if(winner != ' ')
-        cout << "Player " << ((winner == 'X') ? 'X' : 'O') << " wins!" << endl;
-    else
-        cout << "It's a draw!" << endl;
-
-    return 0;
+void TicTacToe::switchPlayer() {
+    currentPlayer = (currentPlayer=='X')?'O':'X';
 }
